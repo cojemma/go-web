@@ -107,6 +107,7 @@ func callApiCount(api string) int {
 }
 
 func main() {
+	// gg
 	_, err := gorm.Open(mysql.Open("root:db@tcp(db:3306)/mysql?charset=utf8mb4&parseTime=True&loc=Local"), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
