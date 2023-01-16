@@ -4,9 +4,7 @@ version: '3.1'
 services:
 
   redis:
-    image: redis
-    volumes:
-      - ./data
+    image: redis:alpine
     restart: always
 
   db:
