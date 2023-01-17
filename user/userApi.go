@@ -5,7 +5,6 @@ import (
 	"go-web/database"
 	"go-web/utils"
 	"net/http"
-	"os/user"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -22,7 +21,7 @@ func GetUsers(c *gin.Context) {
 	count := utils.CallApiCount("main")
 	fmt.Printf("getall Has been call for %v times\n", count)
 
-	var users []user.User
+	var users []User
 	sqldb.Find(&users)
 	c.IndentedJSON(http.StatusOK, users)
 }

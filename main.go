@@ -2,11 +2,19 @@ package main
 
 import (
 	"go-web/user"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
+	env := os.Getenv("ENVIROMENT")
+	if env == "dev" {
+		gin.SetMode(gin.DebugMode)
+	} else {
+		gin.SetMode(gin.ReleaseMode)
+	}
+
 	router := gin.Default()
 	router.GET("", user.GetUsers)
 	router.GET("/users", user.GetUsers)
