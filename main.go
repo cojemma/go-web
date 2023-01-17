@@ -22,11 +22,13 @@ func main() {
 	)
 
 	router.GET("", user.GetUsers)
-	router.GET("/users", user.GetUsers)
-	router.POST("/users", user.PostUser)
-	router.GET("/users/:id", user.GetUserByID)
-	router.DELETE("users/:id", user.DeleteUser)
-	router.PUT("/users/:id", user.UpdateUser)
+
+	userApi := router.Group("/users")
+	userApi.GET("", user.GetUsers)
+	userApi.POST("", user.PostUser)
+	userApi.GET("/:id", user.GetUserByID)
+	userApi.DELETE("/:id", user.DeleteUser)
+	userApi.PUT("/:id", user.UpdateUser)
 
 	router.Run()
 }
