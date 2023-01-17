@@ -2,6 +2,7 @@ package main
 
 import (
 	"go-web/user"
+	"go-web/utils"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -16,6 +17,10 @@ func main() {
 	}
 
 	router := gin.Default()
+	router.Use(
+		utils.CallApiCount,
+	)
+
 	router.GET("", user.GetUsers)
 	router.GET("/users", user.GetUsers)
 	router.POST("/users", user.PostUser)
@@ -24,5 +29,4 @@ func main() {
 	router.PUT("/users/:id", user.UpdateUser)
 
 	router.Run()
-
 }

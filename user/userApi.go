@@ -1,9 +1,7 @@
 package user
 
 import (
-	"fmt"
 	"go-web/database"
-	"go-web/utils"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -18,17 +16,12 @@ func init() {
 }
 
 func GetUsers(c *gin.Context) {
-	count := utils.CallApiCount("main")
-	fmt.Printf("getall Has been call for %v times\n", count)
-
 	var users []User
 	sqldb.Find(&users)
 	c.IndentedJSON(http.StatusOK, users)
 }
 
 func PostUser(c *gin.Context) {
-	utils.CallApiCount("postnew")
-
 	var newUser User
 	if err := c.BindJSON(&newUser); err != nil {
 		return
@@ -40,8 +33,6 @@ func PostUser(c *gin.Context) {
 }
 
 func GetUserByID(c *gin.Context) {
-	utils.CallApiCount("getby")
-
 	id := c.Param("id")
 
 	var users []User
@@ -55,8 +46,6 @@ func GetUserByID(c *gin.Context) {
 }
 
 func DeleteUser(c *gin.Context) {
-	utils.CallApiCount("delete")
-
 	id := c.Param("id")
 
 	result := sqldb.Delete(&User{}, id)
@@ -69,8 +58,6 @@ func DeleteUser(c *gin.Context) {
 }
 
 func UpdateUser(c *gin.Context) {
-	utils.CallApiCount("update")
-
 	var newuser User
 	c.ShouldBind(&newuser)
 
