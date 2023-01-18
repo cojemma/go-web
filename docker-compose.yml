@@ -19,6 +19,8 @@ services:
       - '3306'
     ports:
       - '3306:3306'
+    volumes:
+      - ./datadir:/mysqlData
 
 
   api_server:
