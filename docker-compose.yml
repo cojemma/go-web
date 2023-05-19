@@ -28,8 +28,23 @@ services:
       context: .
       dockerfile: Dockerfile
     restart: always    
-    ports:
-      - "8080:8080"
+    # ports:
+    #   - "8080:8080"
     depends_on:
       - redis
       - db
+    deploy:
+      replicas: 2
+
+  proxy:
+    image: nginx
+    volumes:
+      - type: bind
+        source: ./proxy/nginx.conf
+        target: /etc/nginx/conf.d/default.conf
+        read_only: true
+    ports:
+      - 8080:80
+    depends_on:
+      - api_server
+      

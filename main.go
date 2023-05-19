@@ -1,7 +1,7 @@
 package main
 
 import (
-	"go-web/user"
+	"go-web/api"
 	"go-web/utils"
 	"os"
 
@@ -21,14 +21,14 @@ func main() {
 		utils.CallApiCount,
 	)
 
-	router.GET("", user.GetUsers)
+	router.GET("", api.GetUsers)
 
 	userApi := router.Group("/users")
-	userApi.GET("", user.GetUsers)
-	userApi.POST("", user.PostUser)
-	userApi.GET("/:id", user.GetUserByID)
-	userApi.DELETE("/:id", user.DeleteUser)
-	userApi.PUT("/:id", user.UpdateUser)
+	userApi.GET("", api.GetUsers)
+	userApi.POST("", api.PostUser)
+	userApi.GET("/:id", api.GetUserByID)
+	userApi.DELETE("/:id", api.DeleteUser)
+	userApi.PUT("/:id", api.UpdateUser)
 
-	router.Run()
+	router.Run(":8080")
 }
